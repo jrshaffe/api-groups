@@ -1,0 +1,29 @@
+apiVersion: apis.apps.tanzu.vmware.com/v1alpha1
+kind: APIGroup
+metadata:
+  name: orders
+spec:
+  title: Orders API
+  gatewayListener: orders
+  apiEntities:
+    -  name: Invoice
+       path: /invoice
+       order: 0
+    -  name: Invoice-history
+       path: /invoice
+       order: 0
+       operationsToExpose:
+         -  methods: get
+            path: /invoice/history
+            order: 1
+    -  name: User
+       path: /user
+       operationsToExpose:
+         -  methods: "*"
+            path: "*"
+    -  name: payment
+  description: All operations about orders.
+  version: 1.0.0
+  externalDocs:
+    - https://staging.docs
+    - https://production.docs
