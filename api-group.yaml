@@ -1,29 +1,25 @@
+---
 apiVersion: apis.apps.tanzu.vmware.com/v1alpha1
 kind: APIGroup
 metadata:
   name: orders
+  namespace: my-apps
 spec:
+  gatewayRef:
+    name: contour
+    namespace: projectcontour
+    sectionName: orders-listener
   title: Orders API
-  gatewayListener: orders
-  apiEntities:
-    -  name: Invoice
-       path: /invoice
-       order: 0
-    -  name: Invoice-history
-       path: /invoice
-       order: 0
-       operationsToExpose:
-         -  methods: get
-            path: /invoice/history
-            order: 1
-    -  name: User
-       path: /user
-       operationsToExpose:
-         -  methods: "*"
-            path: "*"
-    -  name: payment
   description: All operations about orders.
   version: 1.0.0
   externalDocs:
     - https://staging.docs
     - https://production.docs
+  apiEntities: # optional governance rules
+    - name: my-apps/invoices
+      pathPrefix: /invoices
+      order: 0
+    - name: another-org/payments
+      operationsToExpose:
+        - methods: post
+          path: /payments
