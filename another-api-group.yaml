@@ -1,0 +1,24 @@
+apiVersion: apis.apps.tanzu.vmware.com/v1alpha1
+kind: APIGroup
+metadata:
+  name: more-orders
+  namespace: my-apps
+spec:
+  gatewayRef:
+    name: contour
+    namespace: projectcontour
+    sectionName: orders-listener
+  title: Orders API
+  description: All operations about orders.
+  version: 1.0.0
+  externalDocs:
+    - https://staging.docs
+    - https://production.docs
+  apiEntities: # optional governance rules
+    - name: my-apps/invoices
+      pathPrefix: /invoices
+      order: 0
+    - name: another-org/payments
+      operationsToExpose:
+        - methods: post
+          path: /payments
