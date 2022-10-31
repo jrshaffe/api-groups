@@ -18,7 +18,7 @@ spec:
   apiEntities: # optional governance rules
     - name: my-apps/invoices
       pathPrefix: /invoices
-      order: 0
+      order: 0
     - name: another-org/payments
       operationsToExpose:
         - methods: post
