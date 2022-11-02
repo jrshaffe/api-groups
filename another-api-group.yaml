@@ -19,7 +19,3 @@ spec:
     - name: my-apps/invoices
       pathPrefix: /invoices
       order: 0
-    - name: another-org/payments
-      operationsToExpose:
-        - methods: post
-          path: /payments
